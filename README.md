@@ -15,11 +15,9 @@ and a final result summary screen — all wrapped in a smooth dark-themed UI.
 
 ---
 
-## 📸 Screenshots
-
 | Splash Screen                           | Quiz UI                             | Result Screen                           |
 |-----------------------------------------|-------------------------------------|-----------------------------------------|
-| ![splash](/screenshots/splashScreen.png) | ![quiz](/screenshots/quizScreen.png) | ![result](/screenshots/resultScreen.png) |
+| ![splash](screenshots/splashScreen.png) | ![quiz](screenshots/quizScreen.png) | ![result](screenshots/resultScreen.png) |
 
 ---
 

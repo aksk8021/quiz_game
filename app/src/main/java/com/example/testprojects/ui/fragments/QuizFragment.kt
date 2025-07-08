@@ -5,10 +5,7 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.*
-import android.util.Log
 import android.view.*
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -130,7 +127,8 @@ class QuizFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun updateQuestionUI(index: Int, total: Int, options: List<String>, answer: Int) {
         val currentIndex = viewModel.currentIndex.value ?: 0
-        updateLeafProgress(currentIndex)
+        val totalQuestions = viewModel.questions.value?.size ?: 0
+        updateLeafProgress(currentIndex, totalQuestions)
 
         binding.tvQuestionCount.text = "Question ${index + 1} of $total"
         showOptions(options, answer)
@@ -161,8 +159,12 @@ class QuizFragment : Fragment() {
         }
     }
 
-    private fun updateLeafProgress(currentIndex: Int) {
-        val redLeafCount = currentIndex / 2
+    private fun updateLeafProgress(currentIndex: Int, totalQuestions: Int) {
+        val totalLeaves = 5
+        val currentQuestion = currentIndex + 1
+
+        val progressRatio = currentQuestion.toFloat() / totalQuestions
+        val redLeafCount = (progressRatio * totalLeaves).toInt().coerceAtMost(totalLeaves)
 
         val leafViews = listOf(
             binding.leaf1,
@@ -173,14 +175,14 @@ class QuizFragment : Fragment() {
         )
 
         leafViews.forEachIndexed { index, imageView ->
-            val color = if (index < redLeafCount) {
+            val colorRes = if (index < redLeafCount) {
                 android.R.color.holo_red_dark
             } else {
                 android.R.color.white
             }
 
             imageView.setColorFilter(
-                ContextCompat.getColor(requireContext(), color),
+                ContextCompat.getColor(requireContext(), colorRes),
                 PorterDuff.Mode.SRC_IN
             )
         }

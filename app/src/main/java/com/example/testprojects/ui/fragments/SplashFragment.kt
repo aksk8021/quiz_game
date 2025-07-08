@@ -40,7 +40,7 @@ class SplashFragment : Fragment() {
                         R.id.splashFragment) {
                         findNavController().navigate(R.id.action_splashFragment_to_quizFragment)
                     }
-                }, 200)
+                }, 2000)
             }
         }
 

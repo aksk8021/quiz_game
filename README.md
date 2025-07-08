@@ -54,7 +54,7 @@ MainActivity
 - UI observes ViewModel via LiveData
 
 ##  ⚙️ Setup Instructions
-git clone https://github.com/yourusername/quiz-app.git
+git clone https://github.com/aksk8021/quiz_game.git 
 
 ## 🔁 Restart Logic
 On quiz completion, users see their:

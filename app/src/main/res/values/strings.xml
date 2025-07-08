@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">QuizApp</string>
+    <string name="question_will_appear_here">Question will appear here</string>
+    <string name="skip">Skip</string>
+    <string name="longest_streak_0">Longest Streak: 0</string>
+    <string name="restart_quiz">Restart Quiz</string>
+    <string name="skipped_0">Skipped: 0</string>
+    <string name="score_0_10">Score: 0/10</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="you_ve_completed_the_quiz_here_s_your_performance_summary">You\'ve completed the quiz. Here\'s your performance summary</string>
+    <string name="correct_answers">Correct Answers</string>
+    <string name="random_number">5</string>
+    <string name="highest_streak">Highest Streak</string>
+    <string name="quiz">Quiz</string>
+    <string name="question_1_of_5">Question 1 of 5</string>
+    <string name="question_goes_here">Question goes here</string>
+    <string name="random_questions_streak_achieved">3 questions streak achieved!!</string>
+    <string name="add_leaf_to_indicate_question">Add leaf to indicate question</string>
+</resources>

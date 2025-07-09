@@ -3,6 +3,7 @@ package com.example.testprojects.ui.fragments
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -37,6 +38,10 @@ class ResultFragment : Fragment() {
         binding.btnRestart.setOnClickListener {
             viewModel.resetQuiz()
             findNavController().navigate(R.id.action_resultFragment_to_quizFragment)
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            requireActivity().finish()
         }
     }
 

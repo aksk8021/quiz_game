@@ -1,13 +1,16 @@
 package com.example.testprojects.ui.fragments
 
 import android.annotation.SuppressLint
-import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.os.*
-import android.view.*
+import android.os.Bundle
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -34,6 +37,10 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupListeners()
         observeQuestionIndex()
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            requireActivity().finish()
+        }
     }
 
     private fun setupListeners() {
@@ -50,8 +57,6 @@ class QuizFragment : Fragment() {
     ) {
         binding.layoutOptions.removeAllViews()
         val context = requireContext()
-
-        // Resolve theme-aware text color
         val resolvedTextColor = MaterialColors.getColor(
             context,
             com.google.android.material.R.attr.colorOnSurface,
@@ -77,21 +82,21 @@ class QuizFragment : Fragment() {
                 }
 
                 setOnClickListener {
-                    // Disable all options
                     for (i in 0 until binding.layoutOptions.childCount) {
                         binding.layoutOptions.getChildAt(i).isClickable = false
                     }
-
-                    // Show correct and incorrect answers
                     for (i in 0 until binding.layoutOptions.childCount) {
                         val child = binding.layoutOptions.getChildAt(i) as TextView
                         val isCorrect = i == correctAnswer
                         val isSelected = child.text == optionText
 
                         child.background = when {
-                            isSelected && isCorrect -> ContextCompat.getDrawable(context, R.drawable.bg_option_correct)
-                            isSelected && !isCorrect -> ContextCompat.getDrawable(context, R.drawable.bg_option_wrong)
-                            !isSelected && isCorrect -> ContextCompat.getDrawable(context, R.drawable.bg_option_correct)
+                            isSelected && isCorrect ->
+                                ContextCompat.getDrawable(context, R.drawable.bg_option_correct)
+                            isSelected && !isCorrect ->
+                                ContextCompat.getDrawable(context, R.drawable.bg_option_wrong)
+                            !isSelected && isCorrect ->
+                                ContextCompat.getDrawable(context, R.drawable.bg_option_correct)
                             else -> ContextCompat.getDrawable(context, R.drawable.bg_option)
                         }
                     }
@@ -195,9 +200,5 @@ class QuizFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun Int.dpToPx(): Int {
-        return (this * Resources.getSystem().displayMetrics.density).toInt()
     }
 }
